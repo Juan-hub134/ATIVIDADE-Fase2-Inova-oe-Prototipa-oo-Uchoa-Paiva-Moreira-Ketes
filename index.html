@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LocaFipe - Protótipo</title>
+<style>
+:root{--bg:#f4f7fb;--card:#fff;--ink:#172033;--muted:#6f7b91;--line:#e2e8f0;--nav:#101827;--accent:#2563eb;--soft:#eaf1ff;--danger:#b42318}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,Segoe UI,Arial;background:var(--bg);color:var(--ink)}button,input,select{font:inherit}
+button{cursor:pointer}.hidden{display:none!important}
+.login{min-height:100vh;display:grid;grid-template-columns:1.15fr .85fr}.login-hero{background:linear-gradient(145deg,#0f172a,#1e3a5f);color:#fff;padding:9vw;display:flex;flex-direction:column;justify-content:center}.login-hero h1{font-size:52px;margin:8px 0}.login-hero p{max-width:520px;color:#cbd5e1;font-size:18px}.badge{font-size:12px;text-transform:uppercase;letter-spacing:.18em}.login-box{display:grid;place-items:center;padding:28px}.login-card{width:min(420px,100%);background:#fff;border:1px solid var(--line);border-radius:18px;padding:30px;box-shadow:0 20px 50px #17203312}.login-card h2{margin:0 0 6px}.login-card p{margin:0 0 22px;color:var(--muted)}label{display:grid;gap:7px;font-size:13px;font-weight:700;margin-bottom:14px}input,select{border:1px solid #ccd5e2;border-radius:10px;padding:12px;background:#fff;width:100%}.btn{border:0;border-radius:10px;padding:12px 16px;font-weight:700}.primary{background:var(--accent);color:#fff}.secondary{background:#fff;border:1px solid var(--line)}.login-card .btn{width:100%}
+.app{min-height:100vh;display:grid;grid-template-columns:230px 1fr}.sidebar{background:var(--nav);color:#dbe3ef;padding:22px 14px;display:flex;flex-direction:column}.logo{font-size:21px;font-weight:800;padding:8px 10px 25px}.logo span{color:#60a5fa}.nav{display:grid;gap:6px}.nav button{border:0;background:transparent;color:#cbd5e1;text-align:left;padding:12px;border-radius:9px}.nav button:hover,.nav button.active{background:#1f2a3c;color:#fff}.logout{margin-top:auto}.main{padding:32px;min-width:0}.top{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:24px}.top h1{margin:0;font-size:29px}.top p{margin:5px 0;color:var(--muted)}.user{background:#fff;border:1px solid var(--line);padding:10px 13px;border-radius:12px;font-size:13px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}.metric{font-size:31px;font-weight:800;margin-top:12px}.muted{color:var(--muted);font-size:13px}.section{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;margin-top:18px}.section-head{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:15px}.section-head h2{margin:0}.toolbar{display:flex;gap:10px;margin-bottom:14px}.toolbar input{max-width:360px}.table{overflow:auto;border:1px solid var(--line);border-radius:11px}table{width:100%;border-collapse:collapse;min-width:720px}th,td{text-align:left;padding:13px 14px;border-bottom:1px solid #edf1f6}th{font-size:11px;text-transform:uppercase;color:var(--muted);background:#f8fafc}.actions button{border:0;background:var(--soft);padding:7px 10px;border-radius:7px;margin-right:5px}.actions .del{color:var(--danger);background:#fff1f2}.form{display:grid;grid-template-columns:1fr 1fr;gap:12px}.form label{margin:0}.full{grid-column:1/-1}.modal-bg{position:fixed;inset:0;background:#0008;display:grid;place-items:center;padding:18px;z-index:9}.modal{background:#fff;border-radius:16px;padding:22px;width:min(650px,100%);max-height:90vh;overflow:auto}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.modal-head h2{margin:0}.close{border:0;background:#eef2f7;border-radius:8px;padding:8px 11px}.notice{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;padding:12px;border-radius:10px;margin-bottom:16px}.status{display:inline-block;background:#ecfdf3;color:#067647;padding:5px 8px;border-radius:99px;font-size:12px;font-weight:700}.fipe-result{margin-top:16px;background:#101827;color:#fff;border-radius:14px;padding:22px}.price{font-size:32px;font-weight:800;margin:5px 0}
+@media(max-width:900px){.cards{grid-template-columns:1fr 1fr}.app{grid-template-columns:180px 1fr}.main{padding:22px}.login{grid-template-columns:1fr}.login-hero{display:none}}
+@media(max-width:600px){.app{display:block}.sidebar{display:block}.nav{display:flex;overflow:auto}.logout{margin-top:8px}.main{padding:15px}.cards{grid-template-columns:1fr}.form{grid-template-columns:1fr}.full{grid-column:auto}.top{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<section id="login" class="login">
+  <div class="login-hero"><div class="badge">Sistema de locação + FIPE</div><h1>LocaFipe</h1><p>Protótipo acadêmico baseado no DER da locadora: clientes, veículos, atendentes, contratos e histórico de consultas FIPE.</p></div>
+  <div class="login-box"><form id="loginForm" class="login-card"><h2>Bem-vindo</h2><p>Entre para acessar o painel administrativo.</p><label>E-mail<input type="email" value="admin@locafipe.com" required></label><label>Senha<input type="password" value="123456" required></label><button class="btn primary">Entrar</button><div class="muted" style="margin-top:14px;text-align:center">Demonstração: qualquer e-mail e senha entram.</div></form></div>
+</section>
+
+<section id="app" class="app hidden">
+  <aside class="sidebar"><div class="logo">Loca<span>Fipe</span></div><div class="nav">
+    <button data-page="dashboard" class="active">▦ Dashboard</button>
+    <button data-page="clientes">👥 Clientes</button>
+    <button data-page="veiculos">🚗 Veículos</button>
+    <button data-page="atendentes">🧑‍💼 Atendentes</button>
+    <button data-page="contratos">📄 Contratos</button>
+    <button data-page="fipe">🔎 Consulta FIPE</button>
+  </div><button id="logout" class="btn secondary logout">Sair</button></aside>
+  <main class="main">
+    <div class="top"><div><h1 id="title">Dashboard</h1><p id="subtitle">Visão geral da locadora</p></div><div class="user">Administrador • Protótipo</div></div>
+
+    <div id="dashboard" class="page">
+      <div class="notice">Este frontend é somente uma demonstração visual. Não existe backend nem banco conectado.</div>
+      <div class="cards"><div class="card"><div class="muted">Clientes</div><div class="metric">24</div></div><div class="card"><div class="muted">Veículos</div><div class="metric">18</div></div><div class="card"><div class="muted">Contratos ativos</div><div class="metric">11</div></div><div class="card"><div class="muted">Consultas FIPE</div><div class="metric">47</div></div></div>
+      <div class="section"><h2>Contratos recentes</h2><div class="table"><table><thead><tr><th>Contrato</th><th>Cliente</th><th>Veículo</th><th>Pagamento</th><th>Status</th></tr></thead><tbody><tr><td>#1001</td><td>Ana Souza</td><td>Corolla 2022</td><td>Cartão</td><td><span class="status">Ativo</span></td></tr><tr><td>#1002</td><td>Carlos Lima</td><td>Onix 2023</td><td>PIX</td><td><span class="status">Ativo</span></td></tr></tbody></table></div></div>
+    </div>
+
+    <div id="clientes" class="page hidden"><div class="section"><div class="section-head"><h2>Clientes</h2><button class="btn primary add" data-type="cliente">+ Novo cliente</button></div><div class="toolbar"><input placeholder="Buscar cliente..."></div><div class="table"><table><thead><tr><th>ID</th><th>CPF</th><th>Nome</th><th>E-mail</th><th>Ações</th></tr></thead><tbody><tr><td>1</td><td>123.456.789-00</td><td>Ana Souza</td><td>ana@email.com</td><td class="actions"><button>Editar</button><button class="del">Excluir</button></td></tr><tr><td>2</td><td>987.654.321-00</td><td>Carlos Lima</td><td>carlos@email.com</td><td class="actions"><button>Editar</button><button class="del">Excluir</button></td></tr></tbody></table></div></div></div>
+
+    <div id="veiculos" class="page hidden"><div class="section"><div class="section-head"><h2>Veículos</h2><button class="btn primary add" data-type="veículo">+ Novo veículo</button></div><div class="table"><table><thead><tr><th>ID</th><th>Placa</th><th>Marca</th><th>Modelo</th><th>Tipo</th><th>Ações</th></tr></thead><tbody><tr><td>1</td><td>ABC1D23</td><td>Toyota</td><td>Corolla</td><td>Carro</td><td class="actions"><button>Editar</button><button class="del">Excluir</button></td></tr><tr><td>2</td><td>XYZ9A88</td><td>Chevrolet</td><td>Onix</td><td>Carro</td><td class="actions"><button>Editar</button><button class="del">Excluir</button></td></tr></tbody></table></div></div></div>
+
+    <div id="atendentes" class="page hidden"><div class="section"><div class="section-head"><h2>Atendentes</h2><button class="btn primary add" data-type="atendente">+ Novo atendente</button></div><div class="table"><table><thead><tr><th>ID</th><th>CPF</th><th>Nome</th><th>E-mail</th><th>Ações</th></tr></thead><tbody><tr><td>1</td><td>111.222.333-44</td><td>Marina Alves</td><td>marina@locafipe.com</td><td class="actions"><button>Editar</button><button class="del">Excluir</button></td></tr></tbody></table></div></div></div>
+
+    <div id="contratos" class="page hidden"><div class="section"><div class="section-head"><h2>Contratos</h2><button class="btn primary add" data-type="contrato">+ Novo contrato</button></div><div class="table"><table><thead><tr><th>Nº</th><th>Data</th><th>Cliente</th><th>Veículo</th><th>Atendente</th><th>Vigência</th></tr></thead><tbody><tr><td>1001</td><td>20/09/2026</td><td>Ana Souza</td><td>Corolla</td><td>Marina</td><td>20/09 → 25/09</td></tr><tr><td>1002</td><td>21/09/2026</td><td>Carlos Lima</td><td>Onix</td><td>Marina</td><td>21/09 → 28/09</td></tr></tbody></table></div></div></div>
+
+    <div id="fipe" class="page hidden"><div class="section"><h2>Consulta FIPE</h2><p class="muted">Simulação da consulta e do histórico CONSULTA_FIPE do DER.</p><form id="fipeForm" class="form"><label>Tipo<select><option>Carros</option><option>Motos</option><option>Caminhões</option></select></label><label>Marca<select><option>Toyota</option><option>Honda</option><option>Chevrolet</option></select></label><label>Modelo<select><option>Corolla</option><option>Civic</option><option>Onix</option></select></label><label>Ano<select><option>2024</option><option>2023</option><option>2022</option></select></label><div class="full"><button class="btn primary">Consultar</button></div></form><div id="fipeResult" class="fipe-result hidden"><div class="muted" style="color:#aeb9ca">Valor FIPE simulado</div><div class="price">R$ 128.450,00</div><div>Toyota Corolla • Código FIPE 002111-0 • Setembro/2026</div></div></div></div>
+  </main>
+</section>
+
+<div id="modal" class="modal-bg hidden"><div class="modal"><div class="modal-head"><h2 id="modalTitle">Novo cadastro</h2><button id="close" class="close">✕</button></div><form id="fakeForm" class="form"><label>Nome / descrição<input required placeholder="Digite aqui"></label><label>CPF / placa / código<input required placeholder="Digite aqui"></label><label class="full">Informação complementar<input placeholder="Campo demonstrativo"></label><div class="full" style="display:flex;justify-content:flex-end;gap:8px"><button type="button" id="cancel" class="btn secondary">Cancelar</button><button class="btn primary">Salvar</button></div></form></div></div>
+
+<script>
+const login=document.getElementById('login'),app=document.getElementById('app');
+document.getElementById('loginForm').addEventListener('submit',e=>{e.preventDefault();login.classList.add('hidden');app.classList.remove('hidden')});
+document.getElementById('logout').addEventListener('click',()=>{app.classList.add('hidden');login.classList.remove('hidden')});
+const titles={dashboard:['Dashboard','Visão geral da locadora'],clientes:['Clientes','Gerenciamento de clientes'],veiculos:['Veículos','Gerenciamento da frota'],atendentes:['Atendentes','Equipe responsável pelos contratos'],contratos:['Contratos','Locações registradas'],fipe:['Consulta FIPE','Consulta e histórico de valores']};
+document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.page').forEach(p=>p.classList.add('hidden'));document.getElementById(b.dataset.page).classList.remove('hidden');document.querySelectorAll('[data-page]').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById('title').textContent=titles[b.dataset.page][0];document.getElementById('subtitle').textContent=titles[b.dataset.page][1]}));
+const modal=document.getElementById('modal');document.querySelectorAll('.add').forEach(b=>b.addEventListener('click',()=>{document.getElementById('modalTitle').textContent='Novo '+b.dataset.type;modal.classList.remove('hidden')}));
+function close(){modal.classList.add('hidden')}document.getElementById('close').onclick=close;document.getElementById('cancel').onclick=close;
+document.getElementById('fakeForm').addEventListener('submit',e=>{e.preventDefault();alert('Salvo apenas na demonstração visual.');close()});
+document.getElementById('fipeForm').addEventListener('submit',e=>{e.preventDefault();document.getElementById('fipeResult').classList.remove('hidden')});
+document.querySelectorAll('.actions button').forEach(b=>b.addEventListener('click',()=>alert('Ação demonstrativa: '+b.textContent)));
+</script>
+</body>
+</html>
