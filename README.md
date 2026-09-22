@@ -20,12 +20,11 @@ O banco de dados será desenvolvido para empresas de aluguel de veículos que at
 ## DER DA LOCADORA 
 ![der](./DER.png)
 
+### Imagem de Interface
 
+![site](./site.png)
 
 [SITE DE INTERFACE](https://atividade-fase2-inova-oe-prototipa.vercel.app/)
-
-
-
 ### COMANDOS DO SQL
 Houve adição de uma Tabela de consulta Fipe
 
