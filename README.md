@@ -17,9 +17,20 @@ Desenvolver um banco de dados relacional para uma empresa de aluguel de veículo
 
 O banco de dados será desenvolvido para empresas de aluguel de veículos que atendem principalmente motoristas de aplicativos. O foco está em pessoas que utilizam veículos alugados para realizar suas atividades profissionais em plataformas como Uber e 99, facilitando o gerenciamento dos clientes, veículos e contratos de aluguel
 
+## DER DA LOCADORA 
+![der](./DER.png)
 
+
+
+[SITE DE INTERFACE](https://atividade-fase2-inova-oe-prototipa.vercel.app/)
+
+
+
+### COMANDOS DO SQL
+Houve adição de uma Tabela de consulta Fipe
 
 ```sql
+-- Tabela de Clientes
 CREATE TABLE cliente (
     id_cliente SERIAL PRIMARY KEY,
     cpf VARCHAR(14) UNIQUE NOT NULL,
@@ -76,3 +87,24 @@ CREATE TABLE consulta_fipe (
 	CONSTRAINT fk_consulta_veiculo FOREIGN KEY (id_veiculo) REFERENCES veiculo(id_veiculo)
 	);
 ```
+## IMAGENS REFERENTES AO pgAdmin 4
+
+* TABELA DE CLIENTE
+
+![cliente](./cliente.png)
+
+* TABELA DE ATENDENTE
+
+ ![atendente](./atendente.png)
+
+ * TABELA DE VEICULOS
+ 
+ ![veiculo](./veiculo.png)
+
+* TABELA DE CONTRATOS
+
+![contrato](./contrato.png)
+
+* TABELA CONSULTA FIPE
+  
+![consulta](./consulta_fipe.png)
