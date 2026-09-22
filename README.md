@@ -17,65 +17,60 @@ O banco de dados será desenvolvido para empresas de aluguel de veículos que at
 
 
 
-
--- =========================================================
--- DER Locadora de Veículos — script de criação (PostgreSQL)
--- Inclui a tabela CONSULTA_FIPE (integração com a API da FIPE)
--- =========================================================
-
+```sql
 CREATE TABLE cliente (
-    id_cliente       SERIAL PRIMARY KEY,
-    cpf              VARCHAR(14)  NOT NULL UNIQUE,
-    nome             VARCHAR(100) NOT NULL,
-    sobrenome        VARCHAR(100) NOT NULL,
-    endereco         VARCHAR(255),
-    dados_bancarios  VARCHAR(255),
-    email            VARCHAR(150) NOT NULL UNIQUE
-);
+    id_cliente SERIAL PRIMARY KEY,
+    cpf VARCHAR(14) UNIQUE NOT NULL,
+    nome VARCHAR(20) NOT NULL,
+    sobrenome VARCHAR(50) NOT NULL,
+    endereco TEXT NOT NULL,
+    dados_bancarios TEXT UNIQUE NOT NULL,
+    email TEXT UNIQUE NOT NULL
+	);
 
+-- Tabela de Veículos
 CREATE TABLE veiculo (
-    id_veiculo   SERIAL PRIMARY KEY,
-    placa        VARCHAR(8)  NOT NULL UNIQUE,
-    marca        VARCHAR(60) NOT NULL,
-    modelo       VARCHAR(60) NOT NULL,
-    tipo         VARCHAR(40)
-);
+    id_veiculo SERIAL PRIMARY KEY,
+    placa VARCHAR(7) UNIQUE NOT NULL,
+    marca TEXT NOT NULL,
+    modelo TEXT NOT NULL,
+    tipo TEXT NOT NULL
+	);
 
+-- Tabela de Atendentes
 CREATE TABLE atendente (
     id_atendente SERIAL PRIMARY KEY,
-    cpf          VARCHAR(14)  NOT NULL UNIQUE,
-    nome         VARCHAR(100) NOT NULL,
-    sobrenome    VARCHAR(100) NOT NULL,
-    endereco     VARCHAR(255),
-    email        VARCHAR(150) NOT NULL UNIQUE
-);
+    cpf VARCHAR(14) UNIQUE NOT NULL,
+    nome VARCHAR(20) NOT NULL,
+    sobrenome VARCHAR(50) NOT NULL,
+    endereco TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL,
+	Ativo BOOLEAN DEFAULT TRUE
+	);
 
+-- Contrato
 CREATE TABLE contrato (
-    numero_contrato  SERIAL PRIMARY KEY,
-    data             DATE NOT NULL DEFAULT CURRENT_DATE,
-    tipo_pagamento   VARCHAR(30) NOT NULL,
-    inicio_vigencia  DATE NOT NULL,
-    fim_vigencia     DATE NOT NULL,
-    id_cliente       INT NOT NULL REFERENCES cliente(id_cliente),
-    id_veiculo       INT NOT NULL REFERENCES veiculo(id_veiculo),
-    id_atendente     INT NOT NULL REFERENCES atendente(id_atendente),
+    numero_contrato SERIAL PRIMARY KEY,
+    data TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    tipo_pagamento TEXT NOT NULL,
+    inicio_vigencia DATE NOT NULL,
+    fim_vigencia DATE NOT NULL,
+    id_cliente INT NOT NULL,
+    id_veiculo INT NOT NULL,
+	id_atendente INT NOT NULL,
+	CONSTRAINT fk_contrato_cliente FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente),
+    CONSTRAINT fk_contrato_veiculo FOREIGN KEY (id_veiculo) REFERENCES veiculo(id_veiculo),
+	CONSTRAINT fk_contrato_atendente FOREIGN KEY (id_atendente) REFERENCES atendente(id_atendente)
+	);
 
-    CONSTRAINT chk_vigencia CHECK (fim_vigencia >= inicio_vigencia)
-);
-
--- Tabela nova: histórico de consultas à API da Tabela FIPE
--- 1 veículo pode ter N consultas ao longo do tempo (relação 1:N)
+-- Consulta FIPE
 CREATE TABLE consulta_fipe (
-    id_consulta      SERIAL PRIMARY KEY,
-    id_veiculo       INT NOT NULL REFERENCES veiculo(id_veiculo),
-    codigo_fipe      VARCHAR(20) NOT NULL,
-    valor            NUMERIC(12,2) NOT NULL,
-    mes_referencia   VARCHAR(30) NOT NULL,
-    data_consulta    TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-
--- Índices para acelerar as buscas mais comuns
-CREATE INDEX idx_contrato_cliente   ON contrato(id_cliente);
-CREATE INDEX idx_contrato_veiculo   ON contrato(id_veiculo);
-CREATE INDEX idx_contrato_atendente ON contrato(id_atendente);
-CREATE INDEX idx_consulta_veiculo   ON consulta_fipe(id_veiculo);
+    id_consulta SERIAL PRIMARY KEY,
+    codigo_fipe VARCHAR(20) NOT NULL,
+    valor NUMERIC(12,2) NOT NULL,
+    mes_referencia TEXT NOT NULL,
+    data_consulta TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    id_veiculo INT NOT NULL,
+	CONSTRAINT fk_consulta_veiculo FOREIGN KEY (id_veiculo) REFERENCES veiculo(id_veiculo)
+	);
+```
