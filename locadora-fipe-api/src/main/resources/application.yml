@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: locadora-fipe-api
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/locadora_fipe}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+
+  flyway:
+    enabled: true
+
+server:
+  port: ${PORT:8080}
+
+fipe:
+  base-url: ${FIPE_BASE_URL:https://parallelum.com.br/fipe/api/v1}
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

@@ -1,0 +1,24 @@
+# Build do Maven
+target/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Variáveis de ambiente / credenciais
+.env
+.env.*
+!.env.example
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+
+# VS Code (opcional)
+.vscode/
